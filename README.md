@@ -60,6 +60,14 @@ Here's an example in cfscript. See examples directory
 	writeDump(var=AuthResp);
 	</cfscript>
 
+## Main Response variables
+
+* response_code: 1 = success, 2 = error/declined, 3 = API call failure
+* error: blank if success. API error text if response_code >= 2
+* errorcode: "0" if success. API error code if response >= 2
+* XMLREQUEST: xmlParse() of API request.
+* XMLRESPONSE: xmlParse() of API Reponse.
+
 ## Files Included
 
 **AuthNetToolsAPI.cfc**
