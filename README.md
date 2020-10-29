@@ -80,15 +80,15 @@ Example Charge a Credit Card file that follow Python examples. This file has the
 
 **examples/AuthTestSimple.cfm**
 
-More compact example to authorize, charge, void, etc. Cut and paste the sction you want to test to your own file.
+More compact example to authorize, charge, void, etc. Cut and paste the section you want to test to your own file.
 
 **examples/cimtest.cfm**
 
-Customer Profile (CIM) examples. Cut and paste the sction you want to test to your own file.
+Customer Profile (CIM) examples. Cut and paste the section you want to test to your own file.
 
 **examples/arbtest.cfm**
 
-Recurring Billing (ARB) examples. Cut and paste the sction you want to test to your own file.
+Recurring Billing (ARB) examples. Cut and paste the section you want to test to your own file.
 
 **examples/AcceptHosted.cfm**
 
