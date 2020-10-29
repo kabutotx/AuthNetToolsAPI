@@ -17,7 +17,7 @@ limitations under the License.
 */
 
 /*
-AuthNetToolsAPI.cfc 0.98.5 from AuthNetTools 1.2
+AuthNetToolsAPI.cfc 0.98.6 from AuthNetTools 1.2
 Author: Robert Davis; kabutotx@gmail.com (Payment API)
 Author: Bud Schneehagen (CIM/ARB code)
 */
@@ -84,10 +84,6 @@ public struct function authPaymentXML(struct authArgs, boolean useXmlFormat=vari
 		// Amount
 		if (isDefined("authArgs.transactionrequest.amount")) {
 			writeOutput("<amount>#authArgs.transactionrequest.amount#</amount>");
-		}
-		// Reference Transaction ID
-		if (isDefined("authArgs.transactionrequest.refTransId")) {
-			writeOutput("<refTransId>#authArgs.transactionrequest.refTransId#</refTransId>");
 		}
 		// Payment
 		if (isDefined("authArgs.transactionrequest.payment")) {
@@ -230,6 +226,10 @@ public struct function authPaymentXML(struct authArgs, boolean useXmlFormat=vari
 		// POS Terminal Number
 		if (isDefined("authArgs.transactionrequest.terminalNumber")) {
 			writeOutput("<terminalNumber>#authArgs.transactionrequest.terminalNumber#</terminalNumber>");
+		}
+		// Reference Transaction ID
+		if (isDefined("authArgs.transactionrequest.refTransId")) {
+			writeOutput("<refTransId>#authArgs.transactionrequest.refTransId#</refTransId>");
 		}
 		// Order
 		if (isDefined("authArgs.transactionrequest.order")) {
