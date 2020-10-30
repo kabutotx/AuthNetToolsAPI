@@ -31,7 +31,7 @@ authArgs = structNew();
 // Optional name and transactionKey
 // authArgs.merchantAuthentication.name=authName;
 // authArgs.merchantAuthentication.transactionKey=authKey;
-authArgs.transactionrequest.transactionType = "priorAuthCaptureTransaction"
+authArgs.transactionrequest.transactionType = "priorAuthCaptureTransaction";
 authArgs.transactionrequest.refTransId = "1234567890";
 authArgs.transactionrequest.amount = "11.52";
 authArgs.transactionrequest.billTo.address= "14 Main Street";
@@ -47,7 +47,7 @@ authArgs = structNew();
 // Optional name and transactionKey
 // authArgs.merchantAuthentication.name=authName;
 // authArgs.merchantAuthentication.transactionKey=authKey;
-authArgs.transactionrequest.transactionType = "refundTransaction"
+authArgs.transactionrequest.transactionType = "refundTransaction";
 authArgs.transactionrequest.amount = "11.52";
 authArgs.transactionRequest.payment.creditCard.cardNumber = "1111";
 authArgs.transactionRequest.payment.creditCard.expirationDate = "2020-12";
@@ -62,7 +62,7 @@ authArgs = structNew();
 // Optional name and transactionKey
 // authArgs.merchantAuthentication.name=authName;
 // authArgs.merchantAuthentication.transactionKey=authKey;
-authArgs.transactionrequest.transactionType = "voidTransaction"
+authArgs.transactionrequest.transactionType = "voidTransaction";
 authArgs.transactionrequest.refTransId = "1234567890";
 
 AuthNetTools =  new AuthNetToolsAPI(1, authName, authKey);
@@ -74,7 +74,7 @@ authArgs = structNew();
 // Optional name and transactionKey
 // authArgs.merchantAuthentication.name=authName;
 // authArgs.merchantAuthentication.transactionKey=authKey;
-authArgs.transactionrequest.transactionType = "authCaptureTransaction"
+authArgs.transactionrequest.transactionType = "authCaptureTransaction";
 authArgs.transactionrequest.amount = "11.52";
 authArgs.transactionrequest.payment.bankAccount.accountType = "checking";
 authArgs.transactionrequest.payment.bankAccount.routingNumber = "121122676";
