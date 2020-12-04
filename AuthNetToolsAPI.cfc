@@ -2358,7 +2358,7 @@ public struct function ARBCreateSubscription(
 		<length>#arguments.length#</length>
 		<unit>#arguments.unit#</unit>
 		</interval>
-		<startDate>#DateFormat(arguments.startDate, "YYYY-MM-DD")#</startDate>
+		<startDate>#DateFormat(arguments.startDate, "yyyy-mm-dd")#</startDate>
 		<totalOccurrences>#arguments.totalOccurrences#</totalOccurrences>");
 		if ( isNumeric(arguments.trialOccurrences) and arguments.trialOccurrences GT 0 ) {
 			writeOutput("<trialOccurrences>#arguments.trialOccurrences#</trialOccurrences>");
@@ -2567,7 +2567,7 @@ public struct function ARBCreateSubscriptionFromProfile(
 		<length>#arguments.length#</length>
 		<unit>#arguments.unit#</unit>
 		</interval>
-		<startDate>#DateFormat(arguments.startDate, "YYYY-MM-DD")#</startDate>
+		<startDate>#DateFormat(arguments.startDate, "yyyy-mm-dd")#</startDate>
 		<totalOccurrences>#arguments.totalOccurrences#</totalOccurrences>");
 		if ( isNumeric(arguments.trialOccurrences) and arguments.trialOccurrences GT 0 ) {
 			writeOutput("<trialOccurrences>#arguments.trialOccurrences#</trialOccurrences>");
@@ -2827,7 +2827,7 @@ public struct function ARBUpdateSubscription(
 			}
 			if ( arguments.startDate is not "" or arguments.totalOccurrences is not "" or arguments.trialOccurrences is not "" ) {
 				if ( arguments.startDate is not "" ) {
-					writeOutput("<startDate>#DateFormat(arguments.startDate, "YYYY-MM-DD")#</startDate>");
+					writeOutput("<startDate>#DateFormat(arguments.startDate, "yyyy-mm-dd")#</startDate>");
 				}
 				if ( isNumeric(arguments.totalOccurrences) ) {
 					writeOutput("<totalOccurrences>#arguments.totalOccurrences#</totalOccurrences>");
