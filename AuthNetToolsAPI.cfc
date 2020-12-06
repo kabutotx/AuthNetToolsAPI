@@ -17,7 +17,7 @@ limitations under the License.
 */
 
 /*
-AuthNetToolsAPI.cfc 0.98.6 from AuthNetTools 1.2
+AuthNetToolsAPI.cfc 0.99 from AuthNetTools 1.2
 Author: Robert Davis; kabutotx@gmail.com (Payment API)
 Author: Bud Schneehagen (CIM/ARB code)
 */
@@ -85,6 +85,10 @@ public struct function authPaymentXML(struct authArgs, boolean useXmlFormat=vari
 		if (isDefined("authArgs.transactionrequest.amount")) {
 			writeOutput("<amount>#authArgs.transactionrequest.amount#</amount>");
 		}
+		// Currency Code
+		if (isDefined("authArgs.transactionrequest.currencyCode")) {
+			writeOutput("<currencyCode>#authArgs.transactionrequest.currencyCode#</currencyCode>");
+		}
 		// Payment
 		if (isDefined("authArgs.transactionrequest.payment")) {
 			writeOutput("<payment>");
@@ -119,29 +123,6 @@ public struct function authPaymentXML(struct authArgs, boolean useXmlFormat=vari
 				}
 				writeOutput("</creditCard>");
 			}
-			// Payment - PayPal Express
-			if (isDefined("authArgs.transactionrequest.payment.payPal")) {
-				writeOutput("<payPal>");
-				if (isDefined("authArgs.transactionrequest.payment.payPal.payerID")) {
-					writeOutput("<payerID>#authArgs.transactionrequest.payment.payPal.payerID#</payerID>");
-				}
-				if (isDefined("authArgs.transactionrequest.payment.payPal.successUrl")) {
-					writeOutput("<successUrl>#authArgs.transactionrequest.payment.payPal.successUrl#</successUrl>");
-				}
-				if (isDefined("authArgs.transactionrequest.payment.payPal.cancelUrl")) {
-					writeOutput("<cancelUrl>#authArgs.transactionrequest.payment.payPal.cancelUrl#</cancelUrl>");
-				}
-				if (isDefined("authArgs.transactionrequest.payment.payPal.paypalLc")) {
-					writeOutput("<paypalLc>#authArgs.transactionrequest.payment.payPal.paypalLc#</paypalLc>");
-				}
-				if (isDefined("authArgs.transactionrequest.payment.payPal.paypalHdrImg")) {
-					writeOutput("<paypalHdrImg>#myXMLFormat(authArgs.transactionrequest.payment.payPal.paypalHdrImg, arguments.useXmlFormat)#</paypalHdrImg>");
-				}
-				if (isDefined("authArgs.transactionrequest.payment.payPal.paypalPayflowcolor")) {
-					writeOutput("<paypalPayflowcolor>#authArgs.transactionrequest.payment.payPal.paypalPayflowcolor#</paypalPayflowcolor>");
-				}
-				writeOutput("</payPal>");
-			}
 			// Payment - Bank Account
 			if (isDefined("authArgs.transactionrequest.payment.bankAccount")) {
 				writeOutput("<bankAccount>");
@@ -167,6 +148,40 @@ public struct function authPaymentXML(struct authArgs, boolean useXmlFormat=vari
 					writeOutput("<checkNumber>#authArgs.transactionrequest.payment.bankAccount.checkNumber#</checkNumber>");
 				}
 				writeOutput("</bankAccount>");
+			}
+			// trackData
+			if (isDefined("authArgs.transactionrequest.payment.trackData")) {
+				writeOutput("<trackData>");
+				if (isDefined("authArgs.transactionrequest.payment.trackData.track1")) {
+					writeOutput("<track1>#authArgs.transactionrequest.payment.trackData.track1#</track1>");
+				}
+				if (isDefined("authArgs.transactionrequest.payment.trackData.track2")) {
+					writeOutput("<track2>#authArgs.transactionrequest.payment.trackData.track2#</track2>");
+				}
+				writeOutput("</trackData>");
+			}
+			// Payment - PayPal Express
+			if (isDefined("authArgs.transactionrequest.payment.payPal")) {
+				writeOutput("<payPal>");
+				if (isDefined("authArgs.transactionrequest.payment.payPal.successUrl")) {
+					writeOutput("<successUrl>#authArgs.transactionrequest.payment.payPal.successUrl#</successUrl>");
+				}
+				if (isDefined("authArgs.transactionrequest.payment.payPal.cancelUrl")) {
+					writeOutput("<cancelUrl>#authArgs.transactionrequest.payment.payPal.cancelUrl#</cancelUrl>");
+				}
+				if (isDefined("authArgs.transactionrequest.payment.payPal.paypalLc")) {
+					writeOutput("<paypalLc>#authArgs.transactionrequest.payment.payPal.paypalLc#</paypalLc>");
+				}
+				if (isDefined("authArgs.transactionrequest.payment.payPal.paypalHdrImg")) {
+					writeOutput("<paypalHdrImg>#myXMLFormat(authArgs.transactionrequest.payment.payPal.paypalHdrImg, arguments.useXmlFormat)#</paypalHdrImg>");
+				}
+				if (isDefined("authArgs.transactionrequest.payment.payPal.paypalPayflowcolor")) {
+					writeOutput("<paypalPayflowcolor>#authArgs.transactionrequest.payment.payPal.paypalPayflowcolor#</paypalPayflowcolor>");
+				}
+				if (isDefined("authArgs.transactionrequest.payment.payPal.payerID")) {
+					writeOutput("<payerID>#authArgs.transactionrequest.payment.payPal.payerID#</payerID>");
+				}
+				writeOutput("</payPal>");
 			}
 			// Payment - Accept Nonce/Visa Checkout
 			if (isDefined("authArgs.transactionrequest.payment.opaqueData")) {
@@ -208,10 +223,6 @@ public struct function authPaymentXML(struct authArgs, boolean useXmlFormat=vari
 				}
 			writeOutput("</profile>");
 		}
-		// Authorization Code
-		if (isDefined("authArgs.transactionrequest.authCode")) {
-			writeOutput("<authCode>#authArgs.transactionrequest.authCode#</authCode>");
-		}
 		// Solution ID
 		if (isDefined("authArgs.transactionrequest.solution")) {
 			writeOutput("solution>");
@@ -221,11 +232,22 @@ public struct function authPaymentXML(struct authArgs, boolean useXmlFormat=vari
 				if (isDefined("authArgs.transactionrequest.solution.name")) {
 					writeOutput("<name>#myXMLFormat(authArgs.transactionrequest.solution.name, arguments.useXmlFormat)#</name>");
 				}
+				if (isDefined("authArgs.transactionrequest.solution.vendorName")) {
+					writeOutput("<vendorName>#myXMLFormat(authArgs.transactionrequest.solution.vendorName, arguments.useXmlFormat)#</vendorName>");
+				}
 			writeOutput("</solution>");
+		}
+		// Visa Transaction ID
+		if (isDefined("authArgs.transactionrequest.callId")) {
+			writeOutput("<callId>#authArgs.transactionrequest.callId#</callId>");
 		}
 		// POS Terminal Number
 		if (isDefined("authArgs.transactionrequest.terminalNumber")) {
 			writeOutput("<terminalNumber>#authArgs.transactionrequest.terminalNumber#</terminalNumber>");
+		}
+		// Authorization Code
+		if (isDefined("authArgs.transactionrequest.authCode")) {
+			writeOutput("<authCode>#authArgs.transactionrequest.authCode#</authCode>");
 		}
 		// Reference Transaction ID
 		if (isDefined("authArgs.transactionrequest.refTransId")) {
@@ -241,10 +263,6 @@ public struct function authPaymentXML(struct authArgs, boolean useXmlFormat=vari
 					writeOutput("<description>#myXMLFormat(authArgs.transactionrequest.order.description, arguments.useXmlFormat)#</description>");
 				}
 			writeOutput("</order>");
-		}
-		// Visa Transaction ID
-		if (isDefined("authArgs.transactionrequest.callId")) {
-			writeOutput("<callId>#authArgs.transactionrequest.callId#</callId>");
 		}
 		// Line Item(s)
 		if (isDefined("authArgs.transactionrequest.lineItems")) {
@@ -472,6 +490,45 @@ public struct function authPaymentXML(struct authArgs, boolean useXmlFormat=vari
 		// Tip
 		if (isDefined("authArgs.transactionrequest.tip")) {
 			writeOutput("<tip>#authArgs.transactionrequest.tip#</tip>");
+		}
+		// processingOptions
+		if (isDefined("authArgs.transactionrequest.processingOptions")) {
+			writeOutput("<processingOptions>");
+				if (isDefined("authArgs.transactionrequest.processingOptions.isFirstRecurringPayment")) {
+					writeOutput("<isFirstRecurringPayment>#authArgs.transactionrequest.processingOptions.isFirstRecurringPayment#</isFirstRecurringPayment>");
+				}
+				if (isDefined("authArgs.transactionrequest.processingOptions.isFirstSubsequentAuth")) {
+					writeOutput("<isFirstSubsequentAuth>#authArgs.transactionrequest.processingOptions.isFirstSubsequentAuth#</isFirstSubsequentAuth>");
+				}
+				if (isDefined("authArgs.transactionrequest.processingOptions.isSubsequentAuth")) {
+					writeOutput("<isSubsequentAuth>#authArgs.transactionrequest.processingOptions.isSubsequentAuth#</isSubsequentAuth>");
+				}
+				if (isDefined("authArgs.transactionrequest.processingOptions.isStoredCredentials")) {
+					writeOutput("<isStoredCredentials>#authArgs.transactionrequest.processingOptions.isStoredCredentials#</isStoredCredentials>");
+				}
+			writeOutput("</processingOptions>");
+		}
+		// subsequentAuthInformation
+		if (isDefined("authArgs.transactionrequest.subsequentAuthInformation")) {
+			writeOutput("<subsequentAuthInformation>");
+				if (isDefined("authArgs.transactionrequest.subsequentAuthInformation.originalNetworkTransId")) {
+					writeOutput("<originalNetworkTransId>#authArgs.transactionrequest.subsequentAuthInformation.originalNetworkTransId#</originalNetworkTransId>");
+				}
+				if (isDefined("authArgs.transactionrequest.subsequentAuthInformation.originalAuthAmount")) {
+					writeOutput("<originalAuthAmount>#authArgs.transactionrequest.subsequentAuthInformation.originalAuthAmount#</originalAuthAmount>");
+				}
+				if (isDefined("authArgs.transactionrequest.subsequentAuthInformation.reason")) {
+					writeOutput("<reason>#authArgs.transactionrequest.subsequentAuthInformation.reason#</reason>");
+				}
+			writeOutput("</subsequentAuthInformation>");
+		}
+		// authorizationIndicatorType
+		if (isDefined("authArgs.transactionrequest.authorizationIndicatorType")) {
+			writeOutput("<authorizationIndicatorType>");
+				if (isDefined("authArgs.transactionrequest.authorizationIndicatorType.authorizationIndicator")) {
+					writeOutput("<authorizationIndicator>#authArgs.transactionrequest.authorizationIndicatorType.amount#</authorizationIndicator>");
+				}
+			writeOutput("</authorizationIndicatorType>");
 		}
 		writeOutput("</transactionRequest>");
 	}
