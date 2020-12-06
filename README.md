@@ -20,13 +20,13 @@ To authenticate with the Authorize.Net API, use your account's API Login ID and 
 ## Initialization
 
 This is a straight forward CFC. You can initialize it using your preferred method. Here are a few examples. The named arguments are listed for clarity but you can also pass the values in by themselves.
-NOTE: You may also pass in your APi Login ID and Transaction Key as an argument instead of the init below.
+NOTE: You may also pass in your API Login ID and Transaction Key as an argument instead of the init below.
 
 **CreateObject()**
 
 	variables.apiLoginId = 'YourIdHere';
 	variables.transactionKey = 'YourKeyHere';
-	variables.AuthNetTools = CreateObject('component', 'AuthNetToolsAPI').init(developmentServer=false, name=variables.apiLoginI, [transactionKey=variables.transactionKey);
+	variables.AuthNetTools = CreateObject('component', 'AuthNetToolsAPI').init(developmentServer=false, name=variables.apiLoginId, transactionKey=variables.transactionKey);
 
 **New Keyword**
 
