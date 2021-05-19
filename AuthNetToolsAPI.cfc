@@ -565,7 +565,7 @@ public struct function authPaymentXML(struct authArgs, boolean useXmlFormat=vari
 	}
 	param name="authArgs.error_email_from" default="";
 	param name="authArgs.error_email_to" default="";
-	param name="authArgs.error_subject" default="AutNetTools.cfc Error";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
 	param name="authArgs.error_smtp" default="";
 	email.error_email_from=authArgs.error_email_from;
 	email.error_email_to=authArgs.error_email_from;
@@ -724,7 +724,7 @@ public struct function createCustomerProfile(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string ADC_Delim_Character="#variables.ADC_Delim_Character#",
 	string Encapsulate_Character='#variables.Encapsulate_Character#',
@@ -924,7 +924,7 @@ public struct function getCustomerProfile(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string customerProfileId="") hint="Gets a CIM Customer Profile." {
 
@@ -992,7 +992,7 @@ public struct function getCustomerProfileIds(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="") hint="Gets a list of all CIM Customer Profile IDs." {
 
 	var response = StructNew();
@@ -1040,7 +1040,7 @@ public struct function updateCustomerProfile(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string merchantCustomerId="", // 2 out of first 3 must have a value
 	string customerdescription="",
@@ -1096,7 +1096,7 @@ public struct function deleteCustomerProfile(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string customerProfileId="") hint="Deletes a CIM customer profile." {
 
@@ -1143,7 +1143,7 @@ public struct function createCustomerPaymentProfile(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string ADC_Delim_Character=variables.ADC_Delim_Character,
 	string Encapsulate_Character=variables.Encapsulate_Character,
@@ -1346,7 +1346,7 @@ public struct function getCustomerPaymentProfile(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string customerProfileId="",
 	string customerPaymentProfileId="",
@@ -1428,7 +1428,7 @@ public struct function getCustomerPaymentProfile(
 		if ( structkeyexists(temp.billTo, "zip") ) { response.zip = temp.billTo.zip.XmlText; }
 		if ( structkeyexists(temp.payment, "creditCard") ) {
 			response.PaymentProfileType = "credit";
-			response.paymentprofiledescription = "#temp.billTo.firstname.XmlText# #temp.billTo.lastname.XmlText# (credit card #temp.payment.creditCard.cardnumber.XmlText#)";
+			response.paymentprofiledescription = "#response.firstname# #response.lastname# (credit card #temp.payment.creditCard.cardnumber.XmlText#)";
 			response.cardnumber = temp.payment.creditCard.cardnumber.XmlText;
 			response.expirationdate  = temp.payment.creditCard.expirationdate.XmlText;
 		} else if ( structkeyexists(temp.payment, "bankAccount") ) {
@@ -1474,7 +1474,7 @@ public struct function validateCustomerPaymentProfile(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string ADC_Delim_Character=variables.ADC_Delim_Character,
 	string Encapsulate_Character=variables.Encapsulate_Character,
@@ -1561,7 +1561,7 @@ public struct function updateCustomerPaymentProfile(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string ADC_Delim_Character=variables.ADC_Delim_Character,
 	string Encapsulate_Character=variables.Encapsulate_Character,
@@ -1782,7 +1782,7 @@ public struct function deleteCustomerPaymentProfile(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string customerProfileId="",
 	string customerPaymentProfileId="") hint="Deletes a CIM Customer Payment Profile." {
@@ -1831,7 +1831,7 @@ public struct function createCustomerShippingAddress(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string customerProfileId="",
 	string ship_firstname="", // Up to 50 characters (no symbols)
@@ -1915,7 +1915,7 @@ public struct function getCustomerShippingAddress(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string customerProfileId="",
 	string customerAddressId="") hint="Gets a CIM Customer Shipping Address." {
@@ -1989,7 +1989,7 @@ public struct function updateCustomerShippingAddress(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string customerProfileId="",
 	string customerAddressId="",
@@ -2074,7 +2074,7 @@ public struct function deleteCustomerShippingAddress(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string customerProfileId="",
 	string customerAddressId="") hint="Deletes a CIM Customer Shipping Address." {
@@ -2123,7 +2123,7 @@ public struct function getCustomerPaymentProfileList(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string searchType="cardsExpiringInMonth",
 	string month="",
@@ -2263,7 +2263,7 @@ public struct function createCustomerProfileFromTransaction(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string transId="") hint="Create a CIM customer, payment and shipping profile from an existing transaction." {
 
@@ -2330,7 +2330,7 @@ public struct function ARBCreateSubscription(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string subscriptionName="",
 	any length="",
@@ -2579,7 +2579,7 @@ public struct function ARBCreateSubscriptionFromProfile(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string subscriptionName="",
 	any length="",
@@ -2688,7 +2688,7 @@ public struct function ARBGetSubscription(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string subscriptionId="",
 	boolean includeTransactions="false") hint="Gets the status of an Automated Recurring Billing Subscription." {
@@ -2737,7 +2737,7 @@ public struct function ARBGetSubscriptionStatus(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string subscriptionId="") hint="Gets the status of an Automated Recurring Billing Subscription." {
 
@@ -2784,7 +2784,7 @@ public struct function ARBUpdateSubscription(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string subscriptionId="",
 	string subscriptionName="",
@@ -3049,7 +3049,7 @@ public struct function ARBCancelSubscription(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string subscriptionId="") hint="Cancels an Automated Recurring Billing Subscription." {
 
@@ -3095,7 +3095,7 @@ public struct function ARBGetSubscriptionList(
 	string transactionkey=variables.transactionKey,
 	string error_email_from="",
 	string error_email_to="",
-	string error_subject="AutNetTools.cfc Error",
+	string error_subject="AutNetToolsAPI.cfc Error",
 	string error_smtp="",
 	string searchType="subscriptionActive",
 	string orderBy="id",
@@ -3190,6 +3190,615 @@ public struct function ARBGetSubscriptionList(
 	return response;
 } // end function ARBGetSubscriptionList()
 
+// Transaction Reporting
+public struct function getSettledBatchList(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Get batch information for all settled batches with a range of dates." {
+
+	var response = StructNew();
+	var temp	= "";
+
+	response.error = ""; // xml errors
+	response.errorcode = "0";
+	response.environment = variables.environment; // xml error codes
+	response.XmlRequest = "";
+	response.XmlResponse = "";
+
+	savecontent variable="myXml" {
+		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
+			<getSettledBatchListRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
+		if ( isDefined("authArgs.refId") ) {
+			writeOutput("<refId>#authArgs.refId#</refId>");
+		}
+		if ( isDefined("authArgs.includeStatistics") ) {
+			writeOutput("<includeStatistics>#authArgs.includeStatistics#</includeStatistics>");
+		}
+		if ( isDefined("authArgs.firstSettlementDate") ) {
+			writeOutput("<firstSettlementDate>#authArgs.firstSettlementDate#</firstSettlementDate>");
+		}
+		if ( isDefined("authArgs.lastSettlementDate") ) {
+			writeOutput("<lastSettlementDate>#authArgs.lastSettlementDate#</lastSettlementDate>");
+		}
+		writeOutput("</getSettledBatchListRequest>");
+	}a
+
+	response.XmlRequest = xmlParse(myXml);
+
+	response = getAPIResponse(response);
+	if ( response.errorcode is "0" ) {
+		if ( isDefined("response.XmlResponse.getSettledBatchListResponse.refId") ) {
+			response.refId = response.XmlResponse.getSettledBatchListResponse.refId.XmlText;
+		}
+	}
+
+	param name="authArgs.error_email_from" default="";
+	param name="authArgs.error_email_to" default="";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
+	param name="authArgs.error_smtp" default="";
+	email.error_email_from=authArgs.error_email_from;
+	email.error_email_to=authArgs.error_email_from;
+	email.error_subject=authArgs.error_subject;
+	email.error_smtp=authArgs.error_smtp;
+	if ( response.error is not "" and authArgs.error_email_to is not "" ) {
+		temp = emailError(a=authArgs, r=response);
+	}
+	return response;
+} // end function getSettledBatchList()
+
+public struct function getTransactionList(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Return data for all transactions in a specified batch." {
+
+	var response = StructNew();
+	var temp	= "";
+
+	response.error = ""; // xml errors
+	response.errorcode = "0";
+	response.environment = variables.environment; // xml error codes
+	response.XmlRequest = "";
+	response.XmlResponse = "";
+
+	savecontent variable="myXml" {
+		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
+			<getTransactionListRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
+		if ( isDefined("authArgs.refId") ) {
+			writeOutput("<refId>#authArgs.refId#</refId>");
+		}
+		if ( isDefined("authArgs.batchId") ) {
+			writeOutput("<batchId>#authArgs.batchId#</batchId>");
+		}
+		if ( isDefined("authArgs.sorting") ) {
+			writeOutput("<sorting>");
+			if ( isDefined("authArgs.sorting.orderBy") ) {
+				writeOutput("<orderBy>#authArgs.sorting.orderBy#</orderBy>");
+			}
+			if ( isDefined("authArgs.sorting.orderDescending") ) {
+				writeOutput("<orderDescending>#authArgs.sorting.orderDescending#</orderDescending>");
+			}
+			writeOutput("</sorting>");
+		}
+		if ( isDefined("authArgs.paging") ) {
+			writeOutput("<paging>");
+			if ( isDefined("authArgs.paging.limit") ) {
+				writeOutput("<limit>#authArgs.paging.limit#</limit>");
+			}
+			if ( isDefined("authArgs.offset") ) {
+				writeOutput("<offset>#authArgs.paging.offset#</offset>");
+			}
+			writeOutput("</paging>");
+		}
+		writeOutput("</getTransactionListRequest>");
+	}
+
+	response.XmlRequest = xmlParse(myXml);
+
+	response = getAPIResponse(response);
+	if ( response.errorcode is "0" ) {
+		if ( isDefined("response.XmlResponse.getTransactionListResponse.refId") ) {
+			response.refId = response.XmlResponse.getTransactionListResponse.refId.XmlText;
+		}
+	}
+
+	param name="authArgs.error_email_from" default="";
+	param name="authArgs.error_email_to" default="";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
+	param name="authArgs.error_smtp" default="";
+	email.error_email_from=authArgs.error_email_from;
+	email.error_email_to=authArgs.error_email_from;
+	email.error_subject=authArgs.error_subject;
+	email.error_smtp=authArgs.error_smtp;
+	if ( response.error is not "" and authArgs.error_email_to is not "" ) {
+		temp = emailError(a=authArgs, r=response);
+	}
+	return response;
+} // end function getTransactionList()
+
+public struct function getUnsettledTransactionList(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Get data for unsettled transactions." {
+
+	var response = StructNew();
+	var temp	= "";
+
+	response.error = ""; // xml errors
+	response.errorcode = "0";
+	response.environment = variables.environment; // xml error codes
+	response.XmlRequest = "";
+	response.XmlResponse = "";
+
+	savecontent variable="myXml" {
+		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
+			<getUnsettledTransactionListRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
+		if ( isDefined("authArgs.refId") ) {
+			writeOutput("<refId>#authArgs.refId#</refId>");
+		}
+		if ( isDefined("authArgs.sorting") ) {
+			writeOutput("<sorting>");
+			if ( isDefined("authArgs.orderBy") ) {
+				writeOutput("<orderBy>#authArgs.orderBy#</orderBy>");
+			}
+			if ( isDefined("authArgs.orderDescending") ) {
+				writeOutput("<orderDescending>#authArgs.orderDescending#</orderDescending>");
+			}
+			writeOutput("</sorting>");
+		}
+		if ( isDefined("authArgs.paging") ) {
+			writeOutput("<paging>");
+			if ( isDefined("authArgs.limit") ) {
+				writeOutput("<limit>#authArgs.limit#</limit>");
+			}
+			if ( isDefined("authArgs.offset") ) {
+				writeOutput("<offset>#authArgs.offset#</offset>");
+			}
+			writeOutput("</paging>");
+		}
+		writeOutput("</getUnsettledTransactionListRequest>");
+	}
+
+	response.XmlRequest = xmlParse(myXml);
+
+	response = getAPIResponse(response);
+	if ( response.errorcode is "0" ) {
+		if ( isDefined("response.XmlResponse.getUnsettledTransactionListResponse.refId") ) {
+			response.refId = response.XmlResponse.getUnsettledTransactionListResponse.refId.XmlText;
+		}
+	}
+
+	param name="authArgs.error_email_from" default="";
+	param name="authArgs.error_email_to" default="";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
+	param name="authArgs.error_smtp" default="";
+	email.error_email_from=authArgs.error_email_from;
+	email.error_email_to=authArgs.error_email_from;
+	email.error_subject=authArgs.error_subject;
+	email.error_smtp=authArgs.error_smtp;
+	if ( response.error is not "" and authArgs.error_email_to is not "" ) {
+		temp = emailError(a=authArgs, r=response);
+	}
+	return response;
+} // end function getUnsettledTransactionList()
+
+public struct function getTransactionListForCustomer(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Retrieve transactions for a specific customer profile or customer payment profile." {
+
+	var response = StructNew();
+	var temp	= "";
+
+	response.error = ""; // xml errors
+	response.errorcode = "0";
+	response.environment = variables.environment; // xml error codes
+	response.XmlRequest = "";
+	response.XmlResponse = "";
+
+	savecontent variable="myXml" {
+		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
+			<getTransactionListForCustomerRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
+		if ( isDefined("authArgs.refId") ) {
+			writeOutput("<refId>#authArgs.refId#</refId>");
+		}
+		if ( isDefined("authArgs.customerProfileId") ) {
+			writeOutput("<customerProfileId>#authArgs.customerProfileId#</customerProfileId>");
+		}
+		if ( isDefined("authArgs.customerPaymentProfileId") ) {
+			writeOutput("<customerPaymentProfileId>#authArgs.customerPaymentProfileId#</customerPaymentProfileId>");
+		}
+		if ( isDefined("authArgs.sorting") ) {
+			writeOutput("<sorting>");
+			if ( isDefined("authArgs.orderBy") ) {
+				writeOutput("<orderBy>#authArgs.orderBy#</orderBy>");
+			}
+			if ( isDefined("authArgs.orderDescending") ) {
+				writeOutput("<orderDescending>#authArgs.orderDescending#</orderDescending>");
+			}
+			writeOutput("</sorting>");
+		}
+		if ( isDefined("authArgs.paging") ) {
+			writeOutput("<paging>");
+			if ( isDefined("authArgs.limit") ) {
+				writeOutput("<limit>#authArgs.limit#</limit>");
+			}
+			if ( isDefined("authArgs.offset") ) {
+				writeOutput("<offset>#authArgs.offset#</offset>");
+			}
+			writeOutput("</paging>");
+		}
+		writeOutput("</getTransactionListForCustomerRequest>");
+	}
+
+	response.XmlRequest = xmlParse(myXml);
+
+	response = getAPIResponse(response);
+	if ( response.errorcode is "0" ) {
+		if ( isDefined("response.XmlResponse.getTransactionListResponse.refId") ) {
+			response.refId = response.XmlResponse.getTransactionListResponse.refId.XmlText;
+		}
+	}
+
+	param name="authArgs.error_email_from" default="";
+	param name="authArgs.error_email_to" default="";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
+	param name="authArgs.error_smtp" default="";
+	email.error_email_from=authArgs.error_email_from;
+	email.error_email_to=authArgs.error_email_from;
+	email.error_subject=authArgs.error_subject;
+	email.error_smtp=authArgs.error_smtp;
+	if ( response.error is not "" and authArgs.error_email_to is not "" ) {
+		temp = emailError(a=authArgs, r=response);
+	}
+	return response;
+} // end function getTransactionListForCustomer()
+
+public struct function getTransactionDetails(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Get detailed information about a specific transaction." {
+
+	var response = StructNew();
+	var temp	= "";
+
+	response.error = ""; // xml errors
+	response.errorcode = "0";
+	response.environment = variables.environment; // xml error codes
+	response.XmlRequest = "";
+	response.XmlResponse = "";
+	response.refId = "";
+	response.originalNetworkTransId = "";
+	response.originalAuthAmount = "";
+
+
+	savecontent variable="myXml" {
+		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
+			<getTransactionDetailsRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
+		if ( isDefined("authArgs.refId") ) {
+			writeOutput("<refId>#authArgs.refId#</refId>");
+		}
+		if ( isDefined("authArgs.transId") ) {
+			writeOutput("<transId>#authArgs.transId#</transId>");
+		}
+		writeOutput("</getTransactionDetailsRequest>");
+	}
+
+	response.XmlRequest = xmlParse(myXml);
+
+	response = getAPIResponse(response);
+	if ( response.errorcode is "0" ) {
+		if ( isDefined("response.XmlResponse.getTransactionDetailsResponse.refId") ) {
+			response.refId = response.XmlResponse.getTransactionDetailsResponse.refId.XmlText;
+		}
+		if ( isDefined("response.XmlResponse.getTransactionDetailsResponse.transaction.originalNetworkTransId") ) {
+			response.originalNetworkTransId = response.XmlResponse.getTransactionDetailsResponse.transaction.originalNetworkTransId.XmlText;
+		}
+		if ( isDefined("response.XmlResponse.getTransactionDetailsResponse.transaction.originalAuthAmount") ) {
+			response.originalAuthAmount = response.XmlResponse.getTransactionDetailsResponse.transaction.originalAuthAmount.XmlText;
+		}
+	}
+
+	param name="authArgs.error_email_from" default="";
+	param name="authArgs.error_email_to" default="";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
+	param name="authArgs.error_smtp" default="";
+	email.error_email_from=authArgs.error_email_from;
+	email.error_email_to=authArgs.error_email_from;
+	email.error_subject=authArgs.error_subject;
+	email.error_smtp=authArgs.error_smtp;
+	if ( response.error is not "" and authArgs.error_email_to is not "" ) {
+		temp = emailError(a=authArgs, r=response);
+	}
+	return response;
+} // end function getTransactionDetails()
+
+public struct function getBatchStatistics(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Returns statistics for a single batch." {
+
+	var response = StructNew();
+	var temp	= "";
+
+	response.error = ""; // xml errors
+	response.errorcode = "0";
+	response.environment = variables.environment; // xml error codes
+	response.XmlRequest = "";
+	response.XmlResponse = "";
+	response.refId = "";
+
+	savecontent variable="myXml" {
+		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
+			<getBatchStatisticsRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
+		if ( isDefined("authArgs.refId") ) {
+			writeOutput("<refId>#authArgs.refId#</refId>");
+		}
+		if ( isDefined("authArgs.batchId") ) {
+			writeOutput("<batchId>#authArgs.batchId#</batchId>");
+		}
+		writeOutput("</getBatchStatisticsRequest>");
+	}
+
+	response.XmlRequest = xmlParse(myXml);
+
+	response = getAPIResponse(response);
+	if ( response.errorcode is "0" ) {
+		if ( isDefined("response.XmlResponse.getBatchStatisticsResponse.refId") ) {
+			response.refId = response.XmlResponse.getBatchStatisticsResponse.refId.XmlText;
+		}
+	}
+
+	param name="authArgs.error_email_from" default="";
+	param name="authArgs.error_email_to" default="";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
+	param name="authArgs.error_smtp" default="";
+	email.error_email_from=authArgs.error_email_from;
+	email.error_email_to=authArgs.error_email_from;
+	email.error_subject=authArgs.error_subject;
+	email.error_smtp=authArgs.error_smtp;
+	if ( response.error is not "" and authArgs.error_email_to is not "" ) {
+		temp = emailError(a=authArgs, r=response);
+	}
+	return response;
+} // end function getBatchStatistics()
+
+public struct function getMerchantDetails(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Receive merchant details." {
+
+	var response = StructNew();
+	var temp	= "";
+
+	response.error = ""; // xml errors
+	response.errorcode = "0";
+	response.environment = variables.environment; // xml error codes
+	response.XmlRequest = "";
+	response.XmlResponse = "";
+	response.refId = "";
+
+	savecontent variable="myXml" {
+		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
+			<getMerchantDetailsRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
+		if ( isDefined("authArgs.refId") ) {
+			writeOutput("<refId>#authArgs.refId#</refId>");
+		}
+		writeOutput("</getMerchantDetailsRequest>");
+	}
+
+	response.XmlRequest = xmlParse(myXml);
+
+	response = getAPIResponse(response);
+	if ( response.errorcode is "0" ) {
+		if ( isDefined("response.XmlResponse.getMerchantDetailsResponse.refId") ) {
+			response.refId = response.XmlResponse.getMerchantDetailsResponse.refId.XmlText;
+		}
+	}
+
+	param name="authArgs.error_email_from" default="";
+	param name="authArgs.error_email_to" default="";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
+	param name="authArgs.error_smtp" default="";
+	email.error_email_from=authArgs.error_email_from;
+	email.error_email_to=authArgs.error_email_from;
+	email.error_subject=authArgs.error_subject;
+	email.error_smtp=authArgs.error_smtp;
+	if ( response.error is not "" and authArgs.error_email_to is not "" ) {
+		temp = emailError(a=authArgs, r=response);
+	}
+	return response;
+} // end function getMerchantDetails()
+
+public struct function getAUJobSummary(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Receive merchant details." {
+
+	var response = StructNew();
+	var temp	= "";
+
+	response.error = ""; // xml errors
+	response.errorcode = "0";
+	response.environment = variables.environment; // xml error codes
+	response.XmlRequest = "";
+	response.XmlResponse = "";
+	response.refId = "";
+
+	savecontent variable="myXml" {
+		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
+			<getAUJobSummaryRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
+		if ( isDefined("authArgs.refId") ) {
+			writeOutput("<refId>#authArgs.refId#</refId>");
+		}
+		if ( isDefined("authArgs.month") ) {
+			writeOutput("<month>#authArgs.month#</month>");
+		}
+		writeOutput("</getAUJobSummaryRequest>");
+	}
+
+	response.XmlRequest = xmlParse(myXml);
+
+	response = getAPIResponse(response);
+	if ( response.errorcode is "0" ) {
+		if ( isDefined("response.XmlResponse.getAUJobSummaryResponse.refId") ) {
+			response.refId = response.XmlResponse.getAUJobSummaryResponse.refId.XmlText;
+		}
+	}
+
+	param name="authArgs.error_email_from" default="";
+	param name="authArgs.error_email_to" default="";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
+	param name="authArgs.error_smtp" default="";
+	email.error_email_from=authArgs.error_email_from;
+	email.error_email_to=authArgs.error_email_from;
+	email.error_subject=authArgs.error_subject;
+	email.error_smtp=authArgs.error_smtp;
+	if ( response.error is not "" and authArgs.error_email_to is not "" ) {
+		temp = emailError(a=authArgs, r=response);
+	}
+	return response;
+} // end function getAUJobSummary()
+
+public struct function getAUJobDetails(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Receive merchant details." {
+
+	var response = StructNew();
+	var temp	= "";
+
+	response.error = ""; // xml errors
+	response.errorcode = "0";
+	response.environment = variables.environment; // xml error codes
+	response.XmlRequest = "";
+	response.XmlResponse = "";
+	response.refId = "";
+
+	savecontent variable="myXml" {
+		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
+			<getAUJobDetailsRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
+		if ( isDefined("authArgs.refId") ) {
+			writeOutput("<refId>#authArgs.refId#</refId>");
+		}
+		if ( isDefined("authArgs.modifiedTypeFilter") ) {
+			writeOutput("<modifiedTypeFilter>#authArgs.modifiedTypeFilter#</modifiedTypeFilter>");
+		}
+		writeOutput("<paging>");
+		if ( isDefined("authArgs.limit") ) {
+			writeOutput("<limit>#authArgs.limit#</limit>");
+		}
+		if ( isDefined("authArgs.offset") ) {
+			writeOutput("<offset>#authArgs.offset#</offset>");
+		}
+		writeOutput("</paging>");
+		writeOutput("</getAUJobDetailsRequest>");
+	}
+
+	response.XmlRequest = xmlParse(myXml);
+
+	response = getAPIResponse(response);
+	if ( response.errorcode is "0" ) {
+		if ( isDefined("response.XmlResponse.getAUJobDetailsResponse.refId") ) {
+			response.refId = response.XmlResponse.getAUJobDetailsResponse.refId.XmlText;
+		}
+	}
+
+	param name="authArgs.error_email_from" default="";
+	param name="authArgs.error_email_to" default="";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
+	param name="authArgs.error_smtp" default="";
+	email.error_email_from=authArgs.error_email_from;
+	email.error_email_to=authArgs.error_email_from;
+	email.error_subject=authArgs.error_subject;
+	email.error_smtp=authArgs.error_smtp;
+	if ( response.error is not "" and authArgs.error_email_to is not "" ) {
+		temp = emailError(a=authArgs, r=response);
+	}
+	return response;
+} // end function getAUJobDetails()
+
+// Accept Suite
 public struct function getHostedProfilePage(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Get Accept Customer Profile Page." {
 
 	var response = StructNew();
@@ -3205,11 +3814,19 @@ public struct function getHostedProfilePage(struct authArgs, boolean useXmlForma
 
 	savecontent variable="myXml" {
 		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
-			<getHostedProfilePageRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">
-			<merchantAuthentication>
-			<name>#arguments.name#</name>
-			<transactionKey>#arguments.transactionKey#</transactionKey>
-			</merchantAuthentication>");
+			<getHostedProfilePageRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
 		if ( isDefined("authArgs.refId") ) {
 			writeOutput("<refId>#authArgs.refId#</refId>");
 		}
@@ -3238,7 +3855,7 @@ public struct function getHostedProfilePage(struct authArgs, boolean useXmlForma
 
 	param name="authArgs.error_email_from" default="";
 	param name="authArgs.error_email_to" default="";
-	param name="authArgs.error_subject" default="AutNetTools.cfc Error";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
 	param name="authArgs.error_smtp" default="";
 	email.error_email_from=authArgs.error_email_from;
 	email.error_email_to=authArgs.error_email_from;
@@ -3265,11 +3882,19 @@ public struct function getHostedPaymentPage(struct authArgs, boolean useXmlForma
 
 	savecontent variable="myXml" {
 		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
-			<getHostedPaymentPageRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">
-			<merchantAuthentication>
-			<name>#arguments.name#</name>
-			<transactionKey>#arguments.transactionKey#</transactionKey>
-			</merchantAuthentication>");
+			<getHostedPaymentPageRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
 		if ( isDefined("authArgs.refId") ) {
 			writeOutput("<refId>#authArgs.refId#</refId>");
 		}
@@ -3460,7 +4085,7 @@ public struct function getHostedPaymentPage(struct authArgs, boolean useXmlForma
 
 	param name="authArgs.error_email_from" default="";
 	param name="authArgs.error_email_to" default="";
-	param name="authArgs.error_subject" default="AutNetTools.cfc Error";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
 	param name="authArgs.error_smtp" default="";
 	email.error_email_from=authArgs.error_email_from;
 	email.error_email_to=authArgs.error_email_from;
