@@ -3362,23 +3362,26 @@ public struct function getUnsettledTransactionList(struct authArgs, boolean useX
 		if ( isDefined("authArgs.refId") ) {
 			writeOutput("<refId>#authArgs.refId#</refId>");
 		}
+		if ( isDefined("authArgs.status") ) {
+			writeOutput("<status>#authArgs.status#</status>");
+		}
 		if ( isDefined("authArgs.sorting") ) {
 			writeOutput("<sorting>");
-			if ( isDefined("authArgs.orderBy") ) {
-				writeOutput("<orderBy>#authArgs.orderBy#</orderBy>");
+			if ( isDefined("authArgs.sorting.orderBy") ) {
+				writeOutput("<orderBy>#authArgs.sorting.orderBy#</orderBy>");
 			}
-			if ( isDefined("authArgs.orderDescending") ) {
-				writeOutput("<orderDescending>#authArgs.orderDescending#</orderDescending>");
+			if ( isDefined("authArgs.sorting.orderDescending") ) {
+				writeOutput("<orderDescending>#authArgs.sorting.orderDescending#</orderDescending>");
 			}
 			writeOutput("</sorting>");
 		}
 		if ( isDefined("authArgs.paging") ) {
 			writeOutput("<paging>");
-			if ( isDefined("authArgs.limit") ) {
-				writeOutput("<limit>#authArgs.limit#</limit>");
+			if ( isDefined("authArgs.paging.limit") ) {
+				writeOutput("<limit>#authArgs.paging.limit#</limit>");
 			}
-			if ( isDefined("authArgs.offset") ) {
-				writeOutput("<offset>#authArgs.offset#</offset>");
+			if ( isDefined("authArgs.paging.offset") ) {
+				writeOutput("<offset>#authArgs.paging.offset#</offset>");
 			}
 			writeOutput("</paging>");
 		}
@@ -3445,21 +3448,21 @@ public struct function getTransactionListForCustomer(struct authArgs, boolean us
 		}
 		if ( isDefined("authArgs.sorting") ) {
 			writeOutput("<sorting>");
-			if ( isDefined("authArgs.orderBy") ) {
-				writeOutput("<orderBy>#authArgs.orderBy#</orderBy>");
+			if ( isDefined("authArgs.sorting.orderBy") ) {
+				writeOutput("<orderBy>#authArgs.sorting.orderBy#</orderBy>");
 			}
-			if ( isDefined("authArgs.orderDescending") ) {
-				writeOutput("<orderDescending>#authArgs.orderDescending#</orderDescending>");
+			if ( isDefined("authArgs.sorting.orderDescending") ) {
+				writeOutput("<orderDescending>#authArgs.sorting.orderDescending#</orderDescending>");
 			}
 			writeOutput("</sorting>");
 		}
 		if ( isDefined("authArgs.paging") ) {
 			writeOutput("<paging>");
-			if ( isDefined("authArgs.limit") ) {
-				writeOutput("<limit>#authArgs.limit#</limit>");
+			if ( isDefined("authArgs.paging.limit") ) {
+				writeOutput("<limit>#authArgs.paging.limit#</limit>");
 			}
-			if ( isDefined("authArgs.offset") ) {
-				writeOutput("<offset>#authArgs.offset#</offset>");
+			if ( isDefined("authArgs.paging.offset") ) {
+				writeOutput("<offset>#authArgs.paging.offset#</offset>");
 			}
 			writeOutput("</paging>");
 		}
@@ -4096,6 +4099,71 @@ public struct function getHostedPaymentPage(struct authArgs, boolean useXmlForma
 	}
 	return response;
 } // end function getHostedPaymentPage()
+
+// Fraud Management
+public struct function updateHeldTransaction(struct authArgs, boolean useXmlFormat=variables.defaultXmlFormat) hint="Approve or Decline a held Transaction." {
+
+	var response = StructNew();
+	var temp	= "";
+
+	response.error = ""; // xml errors
+	response.errorcode = "0";
+	response.environment = variables.environment; // xml error codes
+	response.XmlRequest = "";
+	response.XmlResponse = "";
+	response.refId = "";
+
+	savecontent variable="myXml" {
+		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
+			<updateHeldTransactionRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">");
+		writeOutput("<merchantAuthentication>");
+		if (isDefined("authArgs.merchantAuthentication.name")) {
+			writeOutput("<name>#authArgs.merchantAuthentication.name#</name>");
+		} else {
+			writeOutput("<name>#variables.name#</name>");
+		}
+		if (isDefined("authArgs.merchantAuthentication.transactionKey")) {
+			writeOutput("<transactionKey>#authArgs.merchantAuthentication.transactionKey#</transactionKey>");
+		} else {
+			writeOutput("<transactionKey>#variables.transactionKey#</transactionKey>");
+		}
+		writeOutput("</merchantAuthentication>");
+		if ( isDefined("authArgs.refId") ) {
+			writeOutput("<refId>#authArgs.refId#</refId>");
+		}
+		writeOutput("<heldTransactionRequest>");
+		if ( isDefined("authArgs.heldTransactionRequest.action") ) {
+			writeOutput("<action>#authArgs.heldTransactionRequest.action#</action>");
+		}
+		if ( isDefined("authArgs.heldTransactionRequest.refTransId") ) {
+			writeOutput("<refTransId>#authArgs.heldTransactionRequest.refTransId#</refTransId>");
+		}
+		writeOutput("</heldTransactionRequest>");
+		writeOutput("</updateHeldTransactionRequest>");
+	}
+
+	response.XmlRequest = xmlParse(myXml);
+
+	response = getAPIResponse(response);
+	if ( response.errorcode is "0" ) {
+		if ( isDefined("response.XmlResponse.updateHeldTransactionResponse.refId") ) {
+			response.refId = response.XmlResponse.updateHeldTransactionResponse.refId.XmlText;
+		}
+	}
+
+	param name="authArgs.error_email_from" default="";
+	param name="authArgs.error_email_to" default="";
+	param name="authArgs.error_subject" default="AutNetToolsAPI.cfc Error";
+	param name="authArgs.error_smtp" default="";
+	email.error_email_from=authArgs.error_email_from;
+	email.error_email_to=authArgs.error_email_from;
+	email.error_subject=authArgs.error_subject;
+	email.error_smtp=authArgs.error_smtp;
+	if ( response.error is not "" and authArgs.error_email_to is not "" ) {
+		temp = emailError(a=authArgs, r=response);
+	}
+	return response;
+} // end function updateHeldTransaction()
 
 public string function convertExp(string expirationDate) hint="Convert old MMYY to YYYY-MM format" {
 	newExp = "20#right(arguments.expirationDate, 2)#-#left(arguments.expirationDate, 2)#";
