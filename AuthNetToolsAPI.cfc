@@ -2294,7 +2294,7 @@ public struct function createCustomerProfileFromTransaction(
 
 	response = getAPIResponse(response);
 	if ( response.errorcode is "0" ) {
-		temp = response.XmlResponse.createCustomerProfileFromTransactionResponse;
+		temp = response.XmlResponse.createCustomerProfileResponse;
 		response.refId = temp.refId.XmlText;
 		response.customerProfileId = temp.customerProfileId.XmlText;
 		for (i = 1; i <= arraylen(temp.customerPaymentProfileIdList.numericString); i++) {
