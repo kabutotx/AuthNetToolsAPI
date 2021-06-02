@@ -777,8 +777,8 @@ public struct function createCustomerProfile(
 	response.XmlResponse = "";
 	response.refId = "";
 	response.customerProfileId = "";
-	response.customerPaymentProfileId = "";
-	response.customerAddressId = "";
+	response.customerPaymentProfileIdList = "";
+	response.customerShippingAddressIdList = "";
 	
 	response.response_code = "3";
 	response.reason_code = "";
@@ -892,11 +892,11 @@ public struct function createCustomerProfile(
 		temp = response.XmlResponse.createCustomerProfileResponse;
 		response.refId = temp.refId.XmlText;
 		response.customerProfileId = temp.customerProfileId.XmlText;
-		if (isDefined('temp.customerPaymentProfileIdList.numericString')) {
-			response.customerPaymentProfileId = temp.customerPaymentProfileIdList.numericString.XmlText;
+		for (i = 1; i <= arraylen(temp.customerPaymentProfileIdList); i++) {
+			response.customerPaymentProfileIdList = listappend(response.customerPaymentProfileIdList, temp.customerPaymentProfileIdList.numericString[i].XmlText);
 		}
-		if (isDefined('temp.customerShippingAddressIdList.numericString')) {
-			response.customerAddressId = temp.customerShippingAddressIdList.numericString.XmlText;
+		for (i = 1; i <= arraylen(temp.customerShippingAddressIdList); i++) {
+			response.customerShippingAddressIdList = listappend(response.customerShippingAddressIdList, temp.customerShippingAddressIdList.numericString[i].XmlText);
 		}
 		if (isDefined('temp.validationDirectResponseList.string')) {
 			response.resultstring = temp.validationDirectResponseList.string.XmlText;
@@ -1022,7 +1022,6 @@ public struct function getCustomerProfileIds(
 
 	response = getAPIResponse(response);
 	if ( response.errorcode is "0" ) {
-		response.customerProfileIdList = "";
 		response.refId = response.XmlResponse.getCustomerProfileIdsResponse.refId.XmlText;
 		for (i = 1; i <= arraylen(response.XmlResponse.getCustomerProfileIdsResponse.ids.numericString); i++) {
 			response.customerProfileIdList = listappend(response.customerProfileIdList, response.XmlResponse.getCustomerProfileIdsResponse.ids.numericString[i].XmlText);
@@ -2277,6 +2276,11 @@ public struct function createCustomerProfileFromTransaction(
 	response.XmlRequest = "";
 	response.XmlResponse = "";
 	response.refId = "";
+	response.customerProfileId = "";
+	response.customerPaymentProfileIdList = "";
+	response.customerShippingAddressIdList = "";
+	response.resultstring = "";
+
 
 	savecontent variable="myXml" {
 		writeOutput("<?xml version=""1.0"" encoding=""utf-8""?>
@@ -2297,10 +2301,10 @@ public struct function createCustomerProfileFromTransaction(
 		temp = response.XmlResponse.createCustomerProfileResponse;
 		response.refId = temp.refId.XmlText;
 		response.customerProfileId = temp.customerProfileId.XmlText;
-		for (i = 1; i <= arraylen(temp.customerPaymentProfileIdList.numericString); i++) {
+		for (i = 1; i <= arraylen(temp.customerPaymentProfileIdList); i++) {
 			response.customerPaymentProfileIdList = listappend(response.customerPaymentProfileIdList, temp.customerPaymentProfileIdList.numericString[i].XmlText);
 		}
-		for (i = 1; i <= arraylen(temp.customerShippingAddressIdList.numericString); i++) {
+		for (i = 1; i <= arraylen(temp.customerShippingAddressIdList); i++) {
 			response.customerShippingAddressIdList = listappend(response.customerShippingAddressIdList, temp.customerShippingAddressIdList.numericString[i].XmlText);
 		}
 		if (isDefined('temp.validationDirectResponseList.string')) {
