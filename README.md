@@ -5,12 +5,15 @@ This is a ColdFusion CFC used to connect to the Authorize.net XML API. It is upd
 Thanks to Bud Schneehagen for the donation of his existing CIM/ARB code!
 
 ## API's Supported:
+
  * Payment Transactions API
  * Customer Profiles (CIM)
  * Recurring Billing (ARB)
  * Accept Suite
+ * Transaction Reporting
 
 ## Requirements
+
 * ACF 10+
 * Lucee 4.5 (must install api or apitest.authorize.net SSL Certificates)
 * Lucee 5+
@@ -45,8 +48,8 @@ Here's an example in cfscript. See examples directory
 	// Authorize Credit Card
 	authArgs = structNew();
 	// Optional name and transactionKey here instead of New/CreateObject init
-	// authArgs.merchantAuthentication.name=authName;
-	// authArgs.merchantAuthentication.transactionKey=authKey;
+	// authArgs.merchantAuthentication.name = apiLoginId;
+	// authArgs.merchantAuthentication.transactionKey = transactionKey;
 	authArgs.transactionRequest.payment.creditCard.cardNumber = "4111111111111111";
 	authArgs.transactionRequest.payment.creditCard.expirationDate = "2022-12";
 	authArgs.transactionrequest.transactionType = "authCaptureTransaction"; // "authOnlyTransaction" for Authorize only
@@ -59,6 +62,11 @@ Here's an example in cfscript. See examples directory
 	AuthResp = AuthNetTools.authPaymentXML(authArgs);
 	writeDump(var=AuthResp);
 	</cfscript>
+
+## Main Input variables
+
+* Payment API and Transaction Reporting take a struct() in the same order format as the request XML.
+* CIM and ARB API take a flat struct() to maintain compatibility with AuthNetTools. (see examples)
 
 ## Main Response variables
 
